@@ -2,6 +2,8 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get(`https://api.github.com/users/Obaida-Albaroudi`)
+  
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -45,6 +47,50 @@ const followersArray = [];
 </div>
 
 */
+
+function me(myInfo){
+  
+  //Creation of elements for the html
+  const card = document.createElement('div');
+  const pic = document.createElement('img');
+  const card_info= document.createElement('div');
+  const name = document.createElement('h3');
+  const username = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  //Addition of the different classes that belong to the elements 
+  card.classList.add(`card`);
+  card_infoclassList.add(`card-info`);
+  name.classList.add(`name`);
+  username.classList.add(`username`);
+
+  //The content that will be shown. We are pulling this from the data (myInfo) found in the api we are using
+  pic.src = myInfo.avatar_url;
+  name.textContent = myInfo.name;
+  username.textContent = myInfo.login;
+  location.textContent = myInfo.location;
+  profile.textContent = myInfo.url;
+  followers.textContent = myInfo.followers;
+  following.textContent = myInfo.following;
+  bio.textContent = myInfo.bio;
+
+  //Consolidating and making sure we append accordingly so that the structure works
+  card.appendChild(pic);
+  card.appendChild(card_info);
+  card_info.appendChild(name);
+  card_info.appendChild(username);
+  card_info.appendChild(location);
+  card_info.appendChild(profile);
+  card_info.appendChild(followers);
+  card_info.appendChild(following);
+  card_info.appendChild(bio);
+  return card
+
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
