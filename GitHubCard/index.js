@@ -2,8 +2,15 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-axios.get(`https://api.github.com/users/Obaida-Albaroudi`)
-  
+
+
+const Obaida = axios.get(`https://api.github.com/users/Obaida-Albaroudi`);
+console.log(Obaida)
+const teacher1 = axios.get(`https://api.github.com/users/tetondan`);
+const teacher2 = axios.get(`https://api.github.com/users/dustinmyers`);
+const teacher3 = axios.get(`https://api.github.com/users/justsml`);
+const teacher4 = axios.get(`https://api.github.com/users/luishrd`);
+const teacher5 = axios.get(`https://api.github.com/users/bigknell`);
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -15,6 +22,34 @@ axios.get(`https://api.github.com/users/Obaida-Albaroudi`)
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+// const cards = document.querySelector('.cards');
+// promise
+//   .then(info1 => {
+    
+//     const info = info1.data
+//     console.log(info)
+//     info.forEach( x => {
+//       console.log(x)
+//       const element = me(x);
+//       console.log(element)
+//       cards.appendChild(element)
+//     })
+//   })
+//   .catch(error =>{
+//     console.log("Error")
+//   })
+
+const cards = document.querySelector('.cards');
+
+// Obaida
+//   .then(info1 => {
+//     const info = info1.data
+//     cards.appendChild(me(info))
+//   })
+//   .catch(error =>{
+//     return "Error not workingggggg!"
+//   })
+
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -27,6 +62,20 @@ axios.get(`https://api.github.com/users/Obaida-Albaroudi`)
 */
 
 const followersArray = [];
+followersArray.push(Obaida, teacher1, teacher2, teacher3, teacher4, teacher5);
+console.log(followersArray)
+
+Promise.all(followersArray)
+  .then(info1 => {
+  info1.forEach( data => {
+    const info = data.data
+    console.log(info)
+    cards.appendChild(me(info))
+  })
+})
+.catch(error =>{
+  return "Error not workingggggg!"
+});
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -58,13 +107,14 @@ function me(myInfo){
   const username = document.createElement('p');
   const location = document.createElement('p');
   const profile = document.createElement('p');
+  const anchor = document.createElement('a');
   const followers = document.createElement('p');
   const following = document.createElement('p');
   const bio = document.createElement('p');
 
   //Addition of the different classes that belong to the elements 
   card.classList.add(`card`);
-  card_infoclassList.add(`card-info`);
+  card_info.classList.add(`card-info`);
   name.classList.add(`name`);
   username.classList.add(`username`);
 
@@ -72,11 +122,12 @@ function me(myInfo){
   pic.src = myInfo.avatar_url;
   name.textContent = myInfo.name;
   username.textContent = myInfo.login;
-  location.textContent = myInfo.location;
-  profile.textContent = myInfo.url;
-  followers.textContent = myInfo.followers;
-  following.textContent = myInfo.following;
-  bio.textContent = myInfo.bio;
+  location.textContent = ` Location: ${myInfo.location}`;
+  profile.textContent = `Profile: `;
+  anchor.textContent= `href= ${myInfo.url}`;
+  followers.textContent = `Followers: ${myInfo.followers}`;
+  following.textContent = `Following: ${myInfo.following}`;
+  bio.textContent = `Bio: ${myInfo.bio}`;
 
   //Consolidating and making sure we append accordingly so that the structure works
   card.appendChild(pic);
@@ -88,9 +139,13 @@ function me(myInfo){
   card_info.appendChild(followers);
   card_info.appendChild(following);
   card_info.appendChild(bio);
+  profile.appendChild(anchor)
   return card
 
 }
+
+
+// console.log(me(hi))
 
 /* List of LS Instructors Github username's: 
   tetondan
