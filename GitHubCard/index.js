@@ -107,7 +107,6 @@ function me(myInfo){
   const username = document.createElement('p');
   const location = document.createElement('p');
   const profile = document.createElement('p');
-  const anchor = document.createElement('a');
   const followers = document.createElement('p');
   const following = document.createElement('p');
   const bio = document.createElement('p');
@@ -123,8 +122,7 @@ function me(myInfo){
   name.textContent = myInfo.name;
   username.textContent = myInfo.login;
   location.textContent = ` Location: ${myInfo.location}`;
-  profile.textContent = `Profile: `;
-  anchor.textContent= `href= ${myInfo.url}`;
+  profile.innerHTML = `Profile: <a href=${myInfo.url}>${myInfo.url}</a>`;
   followers.textContent = `Followers: ${myInfo.followers}`;
   following.textContent = `Following: ${myInfo.following}`;
   bio.textContent = `Bio: ${myInfo.bio}`;
@@ -139,7 +137,6 @@ function me(myInfo){
   card_info.appendChild(followers);
   card_info.appendChild(following);
   card_info.appendChild(bio);
-  profile.appendChild(anchor)
   return card
 
 }
